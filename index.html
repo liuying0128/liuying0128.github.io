@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="liuying&#39;s fisrt blog website about computer,programme,life">
+<meta name="description" content="把握当下">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Silhouette">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Silhouette">
-<meta property="og:description" content="liuying&#39;s fisrt blog website about computer,programme,life">
+<meta property="og:description" content="把握当下">
 <meta property="og:locale">
 <meta property="article:author" content="liuying">
-<meta property="article:tag" content="computer life code programme   notes">
+<meta property="article:tag" content="computer life code programme  notes">
 <meta name="twitter:card" content="summary">
 
 
@@ -96,9 +96,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '',
-    scheme: 'Pisces',
+    scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -160,7 +160,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">blog</p>
+        <p class="site-subtitle">life</p>
       
   </div>
 
@@ -186,6 +186,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -252,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/19/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA-%E4%BA%8C-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/20/npm-%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -271,7 +281,695 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/07/19/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA-%E4%BA%8C-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" itemprop="url">hexo博客搭建(二) 基本配置</a></h1>
+                <a class="post-title-link" href="/2021/07/20/npm-%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%AE%89%E8%A3%85/" itemprop="url">npm介绍和安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-20T16:50:57+08:00">
+                2021-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/npm/" itemprop="url" rel="index">
+                    <span itemprop="name">npm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>官方文档 ：<a target="_blank" rel="noopener" href="https://www.npmjs.cn/">npm 中文文档 | npm 中文网 (npmjs.cn)</a></p>
+<p>相关博文：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011342720/article/details/81267908?ops_request_misc=%7B%22request_id%22:%22162677086616780269899199%22,%22scm%22:%2220140713.130102334..%22%7D&request_id=162677086616780269899199&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-6-81267908.first_rank_v2_pc_rank_v29&utm_term=npm%E6%95%99%E7%A8%8B&spm=1018.2226.3001.4187">(13条消息) npm 安装详细教程(cnpm)_u011342720的博客-CSDN博客_npm安装</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39165556/article/details/88286983?ops_request_misc=%7B%22request_id%22:%22162677086616780269899199%22,%22scm%22:%2220140713.130102334..%22%7D&request_id=162677086616780269899199&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-88286983.first_rank_v2_pc_rank_v29&utm_term=npm%E6%95%99%E7%A8%8B&spm=1018.2226.3001.4187">(13条消息) npm的使用教程_菜鸟karroy-CSDN博客_npm教程</a></li>
+</ul>
+</blockquote>
+<h2 id="什么是npm"><a href="#什么是npm" class="headerlink" title="什么是npm"></a>什么是npm</h2><p>npm (node package management)</p>
+<blockquote>
+<p>npm 为你和你的团队打开了连接整个 JavaScript 天才世界的一扇大门。它是世界上最大的软件注册表，每星期大约有 30 亿次的下载量，包含超过 600000 个 <em>包（package）</em> （即，代码模块）。来自各大洲的开源软件开发者使用 npm 互相分享和借鉴。包的结构使您能够轻松跟踪依赖项和版本。</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/20/npm-%E4%BB%8B%E7%BB%8D%E5%92%8C%E5%AE%89%E8%A3%85/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/20/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%BA%94%EF%BC%89NexT%E4%B8%AA%E6%80%A7%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Silhouette">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/20/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%BA%94%EF%BC%89NexT%E4%B8%AA%E6%80%A7%E5%8C%96/" itemprop="url">hexo博客搭建（五）NexT个性化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-20T15:58:16+08:00">
+                2021-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">博客搭建</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/%E4%B8%AA%E6%80%A7%E5%8C%96/" itemprop="url" rel="index">
+                    <span itemprop="name">个性化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前我们安装了NexT主题到hexo博客，并且添加了标签和分类功能</p>
+<p>但是还有还可以配置更多有趣的玩意儿，打造更有个性化的博客</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/20/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%BA%94%EF%BC%89NexT%E4%B8%AA%E6%80%A7%E5%8C%96/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/20/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E5%9B%9B%EF%BC%89%E9%A6%96%E9%A1%B5%E6%96%87%E7%AB%A0%E9%83%A8%E5%88%86%E6%98%BE%E7%A4%BA-%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Silhouette">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/20/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E5%9B%9B%EF%BC%89%E9%A6%96%E9%A1%B5%E6%96%87%E7%AB%A0%E9%83%A8%E5%88%86%E6%98%BE%E7%A4%BA-%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87/" itemprop="url">hexo博客搭建（四）首页文章部分显示/阅读全文</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-20T12:16:16+08:00">
+                2021-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">博客搭建</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h2><p>首页中默认会显示全部文章的全部内容，这样当文章多了后非常不方便选择和查看文章，通过使用‘阅读全文’的功能，能够从文章中选取部分摘要展示到首页，让读者快速地了解文章内容，从而进行选择。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/20/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E5%9B%9B%EF%BC%89%E9%A6%96%E9%A1%B5%E6%96%87%E7%AB%A0%E9%83%A8%E5%88%86%E6%98%BE%E7%A4%BA-%E9%98%85%E8%AF%BB%E5%85%A8%E6%96%87/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/20/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89NexT%E4%B8%BB%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Silhouette">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/20/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89NexT%E4%B8%BB%E9%A2%98/" itemprop="url">hexo博客搭建（三）NexT主题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-20T10:11:59+08:00">
+                2021-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
+                    <span itemprop="name">博客</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%8D%9A%E5%AE%A2/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index">
+                    <span itemprop="name">博客搭建</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="NexT主题安装"><a href="#NexT主题安装" class="headerlink" title="NexT主题安装"></a>NexT主题安装</h2><p>在 Hexo 中有两份主要的配置文件，其名称都是 <code>_config.yml</code>。 其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。</p>
+<p>为了描述方便，在以下说明中，将前者称为 <strong>站点配置文件</strong>， 后者称为 <strong>主题配置文件</strong>。</p>
+<blockquote>
+<p>参考官方文档：<a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/">NexT 使用文档 (iissnan.com)</a></p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/20/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%89%EF%BC%89NexT%E4%B8%BB%E9%A2%98/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/19/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%BA%8C%EF%BC%89%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Silhouette">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/07/19/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%BA%8C%EF%BC%89%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" itemprop="url">hexo博客搭建（二）基本配置</a></h1>
         
 
         <div class="post-meta">
@@ -356,406 +1054,48 @@
       
         
           
-            <blockquote>
-<p> 参考官方文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a></p>
-</blockquote>
-<h1 id="配置文件-config-yml"><a href="#配置文件-config-yml" class="headerlink" title="配置文件 _config.yml"></a>配置文件 _config.yml</h1><h3 id="网站相关"><a href="#网站相关" class="headerlink" title="网站相关"></a>网站相关</h3><p><img src="/2021/07/19/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA-%E4%BA%8C-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/1.jpg" alt="网站相关配置"></p>
-<table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>title</code></td>
-<td align="left">网站标题</td>
-</tr>
-<tr>
-<td align="left"><code>subtitle</code></td>
-<td align="left">网站副标题</td>
-</tr>
-<tr>
-<td align="left"><code>description</code></td>
-<td align="left">网站描述</td>
-</tr>
-<tr>
-<td align="left"><code>keywords</code></td>
-<td align="left">网站的关键词。支持多个关键词。</td>
-</tr>
-<tr>
-<td align="left"><code>author</code></td>
-<td align="left">您的名字</td>
-</tr>
-<tr>
-<td align="left"><code>language</code></td>
-<td align="left">网站使用的语言。对于简体中文用户来说，使用不同的主题可能需要设置成不同的值，请参考你的主题的文档自行设置，常见的有 <code>zh-Hans</code>和 <code>zh-CN</code>。</td>
-</tr>
-<tr>
-<td align="left"><code>timezone</code></td>
-<td align="left">网站时区。Hexo 默认使用您电脑的时区。请参考 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">时区列表</a> 进行设置，如 <code>America/New_York</code>, <code>Japan</code>, 和 <code>UTC</code> 。一般的，对于中国大陆地区可以使用 <code>Asia/Shanghai</code>。</td>
-</tr>
-</tbody></table>
-<h3 id="网址"><a href="#网址" class="headerlink" title="网址"></a>网址</h3><table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th align="left">默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>url</code></td>
-<td align="left">网址, 必须以 <code>http://</code> 或 <code>https://</code> 开头</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>root</code></td>
-<td align="left">网站根目录</td>
-<td align="left"><code>url&#39;s pathname</code></td>
-</tr>
-<tr>
-<td align="left"><code>permalink</code></td>
-<td align="left">文章的 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/permalinks">永久链接</a> 格式</td>
-<td align="left"><code>:year/:month/:day/:title/</code></td>
-</tr>
-<tr>
-<td align="left"><code>permalink_defaults</code></td>
-<td align="left">永久链接中各部分的默认值</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>pretty_urls</code></td>
-<td align="left">改写 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/variables"><code>permalink</code></a> 的值来美化 URL</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>pretty_urls.trailing_index</code></td>
-<td align="left">是否在永久链接中保留尾部的 <code>index.html</code>，设置为 <code>false</code> 时去除</td>
-<td align="left"><code>true</code></td>
-</tr>
-<tr>
-<td align="left"><code>pretty_urls.trailing_html</code></td>
-<td align="left">是否在永久链接中保留尾部的 <code>.html</code>, 设置为 <code>false</code> 时去除 (<em>对尾部的 <code>index.html</code>无效</em>)</td>
-<td align="left"><code>true</code></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>网站存放在子目录</p>
-<p>如果您的网站存放在子目录中，例如 <code>http://example.com/blog</code>，则请将您的 <code>url</code> 设为 <code>http://example.com/blog</code> 并把 <code>root</code> 设为 <code>/blog/</code>。</p>
-</blockquote>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 比如，一个页面的永久链接是 http://example.com/foo/bar/index.html</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: false</span><br><span class="line"># 此时页面的永久链接会变为 http://example.com/foo/bar/</span><br></pre></td></tr></table></figure>
-
-<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th align="left">默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>source_dir</code></td>
-<td align="left">资源文件夹，这个文件夹用来存放内容。</td>
-<td align="left"><code>source</code></td>
-</tr>
-<tr>
-<td align="left"><code>public_dir</code></td>
-<td align="left">公共文件夹，这个文件夹用于存放生成的站点文件。</td>
-<td align="left"><code>public</code></td>
-</tr>
-<tr>
-<td align="left"><code>tag_dir</code></td>
-<td align="left">标签文件夹</td>
-<td align="left"><code>tags</code></td>
-</tr>
-<tr>
-<td align="left"><code>archive_dir</code></td>
-<td align="left">归档文件夹</td>
-<td align="left"><code>archives</code></td>
-</tr>
-<tr>
-<td align="left"><code>category_dir</code></td>
-<td align="left">分类文件夹</td>
-<td align="left"><code>categories</code></td>
-</tr>
-<tr>
-<td align="left"><code>code_dir</code></td>
-<td align="left">Include code 文件夹，<code>source_dir</code> 下的子目录</td>
-<td align="left"><code>downloads/code</code></td>
-</tr>
-<tr>
-<td align="left"><code>i18n_dir</code></td>
-<td align="left">国际化（i18n）文件夹</td>
-<td align="left"><code>:lang</code></td>
-</tr>
-<tr>
-<td align="left"><code>skip_render</code></td>
-<td align="left">跳过指定文件的渲染。匹配到的文件将会被不做改动地复制到 <code>public</code> 目录中。您可使用 <a target="_blank" rel="noopener" href="https://github.com/micromatch/micromatch#extended-globbing">glob 表达式</a>来匹配路径。</td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">skip_render: &quot;mypage/**/*&quot;</span><br><span class="line"># 将会直接将 `source/mypage/index.html` 和 `source/mypage/code.js` 不做改动地输出到 &#x27;public&#x27; 目录</span><br><span class="line"># 你也可以用这种方法来跳过对指定文章文件的渲染</span><br><span class="line">skip_render: &quot;_posts/test-post.md&quot;</span><br><span class="line"># 这将会忽略对 &#x27;test-post.md&#x27; 的渲染</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>提示</p>
-<p>如果您刚刚开始接触 Hexo，通常没有必要修改这一部分的值。</p>
-</blockquote>
-<h3 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h3><table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th align="left">默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>new_post_name</code></td>
-<td align="left">新文章的文件名称</td>
-<td align="left">:title.md</td>
-</tr>
-<tr>
-<td align="left"><code>default_layout</code></td>
-<td align="left">预设布局</td>
-<td align="left">post</td>
-</tr>
-<tr>
-<td align="left"><code>auto_spacing</code></td>
-<td align="left">在中文和英文之间加入空格</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left"><code>titlecase</code></td>
-<td align="left">把标题转换为 title case</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left"><code>external_link</code></td>
-<td align="left">在新标签中打开链接</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left"><code>external_link.enable</code></td>
-<td align="left">在新标签中打开链接</td>
-<td align="left"><code>true</code></td>
-</tr>
-<tr>
-<td align="left"><code>external_link.field</code></td>
-<td align="left">对整个网站（<code>site</code>）生效或仅对文章（<code>post</code>）生效</td>
-<td align="left"><code>site</code></td>
-</tr>
-<tr>
-<td align="left"><code>external_link.exclude</code></td>
-<td align="left">需要排除的域名。主域名和子域名如 <code>www</code> 需分别配置</td>
-<td align="left"><code>[]</code></td>
-</tr>
-<tr>
-<td align="left"><code>filename_case</code></td>
-<td align="left">把文件名称转换为 (1) 小写或 (2) 大写</td>
-<td align="left">0</td>
-</tr>
-<tr>
-<td align="left"><code>render_drafts</code></td>
-<td align="left">显示草稿</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left"><code>post_asset_folder</code></td>
-<td align="left">启动 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/asset-folders">Asset 文件夹</a></td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left"><code>relative_link</code></td>
-<td align="left">把链接改为与根目录的相对位址</td>
-<td align="left">false</td>
-</tr>
-<tr>
-<td align="left"><code>future</code></td>
-<td align="left">显示未来的文章</td>
-<td align="left">true</td>
-</tr>
-<tr>
-<td align="left"><code>highlight</code></td>
-<td align="left">代码块的设置, 请参考 <a target="_blank" rel="noopener" href="https://hexo.io/docs/syntax-highlight#Highlight-js">Highlight.js</a> 进行设置</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>prismjs</code></td>
-<td align="left">代码块的设置, 请参考 <a target="_blank" rel="noopener" href="https://hexo.io/docs/syntax-highlight#PrismJS">PrismJS</a> 进行设置</td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>相对地址</p>
-<p>默认情况下，Hexo 生成的超链接都是绝对地址。例如，如果您的网站域名为 <code>example.com</code>,您有一篇文章名为 <code>hello</code>，那么绝对链接可能像这样：<code>http://example.com/hello.html</code>，它是<strong>绝对</strong>于域名的。相对链接像这样：<code>/hello.html</code>，也就是说，无论用什么域名访问该站点，都没有关系，这在进行反向代理时可能用到。通常情况下，建议使用绝对地址。</p>
-</blockquote>
-<h3 id="分类-amp-标签"><a href="#分类-amp-标签" class="headerlink" title="分类 &amp; 标签"></a>分类 &amp; 标签</h3><table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th align="left">默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>default_category</code></td>
-<td align="left">默认分类</td>
-<td align="left"><code>uncategorized</code></td>
-</tr>
-<tr>
-<td align="left"><code>category_map</code></td>
-<td align="left">分类别名</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>tag_map</code></td>
-<td align="left">标签别名</td>
-<td align="left"></td>
-</tr>
-</tbody></table>
-<h3 id="日期-时间格式"><a href="#日期-时间格式" class="headerlink" title="日期 / 时间格式"></a>日期 / 时间格式</h3><p>Hexo 使用 <a target="_blank" rel="noopener" href="http://momentjs.com/">Moment.js</a> 来解析和显示时间。</p>
-<table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th align="left">默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>date_format</code></td>
-<td align="left">日期格式</td>
-<td align="left"><code>YYYY-MM-DD</code></td>
-</tr>
-<tr>
-<td align="left"><code>time_format</code></td>
-<td align="left">时间格式</td>
-<td align="left"><code>HH:mm:ss</code></td>
-</tr>
-<tr>
-<td align="left"><code>updated_option</code></td>
-<td align="left">当 Front Matter 中没有指定 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/variables#%E9%A1%B5%E9%9D%A2%E5%8F%98%E9%87%8F"><code>updated</code></a> 时 <code>updated</code> 的取值</td>
-<td align="left"><code>mtime</code></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>updated_option</p>
-<p><code>updated_option</code> 控制了当 Front Matter 中没有指定 <code>updated</code> 时，<code>updated</code> 如何取值：</p>
-<ul>
-<li><code>mtime</code>: 使用文件的最后修改时间。这是从 Hexo 3.0.0 开始的默认行为。</li>
-<li><code>date</code>: 使用 <code>date</code> 作为 <code>updated</code> 的值。可被用于 Git 工作流之中，因为使用 Git 管理站点时，文件的最后修改日期常常会发生改变</li>
-<li><code>empty</code>: 直接删除 <code>updated</code>。使用这一选项可能会导致大部分主题和插件无法正常工作。</li>
-</ul>
-<p><code>use_date_for_updated</code> 选项已经被废弃，将会在下个重大版本发布时去除。请改为使用 <code>updated_option: &#39;date&#39;</code>。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use_date_for_updated` | 启用以后，如果 Front Matter 中没有指定 `updated`， [`post.updated`](https://hexo.io/zh-cn/docs/configuration) 将会使用 `date` 的值而不是文件的创建时间。在 Git 工作流中这个选项会很有用 | `true</span><br></pre></td></tr></table></figure>
-
-<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th align="left">默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>per_page</code></td>
-<td align="left">每页显示的文章量 (0 = 关闭分页功能)</td>
-<td align="left"><code>10</code></td>
-</tr>
-<tr>
-<td align="left"><code>pagination_dir</code></td>
-<td align="left">分页目录</td>
-<td align="left"><code>page</code></td>
-</tr>
-</tbody></table>
-<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>theme</code></td>
-<td align="left">当前主题名称。值为<code>false</code>时禁用主题</td>
-</tr>
-<tr>
-<td align="left"><code>theme_config</code></td>
-<td align="left">主题的配置文件。在这里放置的配置会覆盖主题目录下的 <code>_config.yml</code> 中的配置</td>
-</tr>
-<tr>
-<td align="left"><code>deploy</code></td>
-<td align="left">部署部分的设置</td>
-</tr>
-<tr>
-<td align="left"><code>meta_generator</code></td>
-<td align="left"><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta#%E5%B1%9E%E6%80%A7">Meta generator</a> 标签。 值为 <code>false</code> 时 Hexo 不会在头部插入该标签</td>
-</tr>
-</tbody></table>
-<h4 id="包括或不包括目录和文件"><a href="#包括或不包括目录和文件" class="headerlink" title="包括或不包括目录和文件"></a>包括或不包括目录和文件</h4><p>在 Hexo 配置文件中，通过设置 include/exclude 可以让 Hexo 进行处理或忽略某些目录和文件夹。你可以使用 <a target="_blank" rel="noopener" href="https://github.com/isaacs/minimatch">glob 表达式</a> 对目录和文件进行匹配。</p>
-<p><code>include</code> and <code>exclude</code> options only apply to the <code>source/</code> folder, whereas <code>ignore</code> option applies to all folders.</p>
-<table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>include</code></td>
-<td align="left">Hexo 默认会忽略隐藏文件和文件夹（包括名称以下划线和 <code>.</code> 开头的文件和文件夹，Hexo 的 <code>_posts</code> 和 <code>_data</code> 等目录除外）。通过设置此字段将使 Hexo 处理他们并将它们复制到 <code>source</code> 目录下。</td>
-</tr>
-<tr>
-<td align="left"><code>exclude</code></td>
-<td align="left">Hexo 会忽略这些文件和目录</td>
-</tr>
-<tr>
-<td align="left"><code>ignore</code></td>
-<td align="left">Ignore files/folders</td>
-</tr>
-</tbody></table>
-<p>举例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"># Include/Exclude Files/Folders</span><br><span class="line">include:</span><br><span class="line">  - &quot;.nojekyll&quot;</span><br><span class="line">  # 包括 &#x27;source/css/_typing.css&#x27;</span><br><span class="line">  - &quot;css/_typing.css&quot;</span><br><span class="line">  # 包括 &#x27;source/_css/&#x27; 中的任何文件，但不包括子目录及其其中的文件。</span><br><span class="line">  - &quot;_css/*&quot;</span><br><span class="line">  # 包含 &#x27;source/_css/&#x27; 中的任何文件和子目录下的任何文件</span><br><span class="line">  - &quot;_css/**/*&quot;</span><br><span class="line"></span><br><span class="line">exclude:</span><br><span class="line">  # 不包括 &#x27;source/js/test.js&#x27;</span><br><span class="line">  - &quot;js/test.js&quot;</span><br><span class="line">  # 不包括 &#x27;source/js/&#x27; 中的文件、但包括子目录下的所有目录和文件</span><br><span class="line">  - &quot;js/*&quot;</span><br><span class="line">  # 不包括 &#x27;source/js/&#x27; 中的文件和子目录下的任何文件</span><br><span class="line">  - &quot;js/**/*&quot;</span><br><span class="line">  # 不包括 &#x27;source/js/&#x27; 目录下的所有文件名以 &#x27;test&#x27; 开头的文件，但包括其它文件和子目录下的单文件</span><br><span class="line">  - &quot;js/test*&quot;</span><br><span class="line">  # 不包括 &#x27;source/js/&#x27; 及其子目录中任何以 &#x27;test&#x27; 开头的文件</span><br><span class="line">  - &quot;js/**/test*&quot;</span><br><span class="line">  # 不要用 exclude 来忽略 &#x27;source/_posts/&#x27; 中的文件。你应该使用 &#x27;skip_render&#x27;，或者在要忽略的文件的文件名之前加一个下划线 &#x27;_&#x27;</span><br><span class="line">  # 在这里配置一个 - &quot;_posts/hello-world.md&quot; 是没有用的。</span><br><span class="line"></span><br><span class="line">ignore:</span><br><span class="line">  # Ignore any folder named &#x27;foo&#x27;.</span><br><span class="line">  - &quot;**/foo&quot;</span><br><span class="line">  # Ignore &#x27;foo&#x27; folder in &#x27;themes/&#x27; only.</span><br><span class="line">  - &quot;**/themes/*/foo&quot;</span><br><span class="line">  # Same as above, but applies to every subfolders of &#x27;themes/&#x27;.</span><br><span class="line">  - &quot;**/themes/**/foo&quot;</span><br></pre></td></tr></table></figure>
-
-<p>列表中的每一项都必须用单引号或双引号包裹起来。</p>
-<p><code>include</code> 和 <code>exclude</code> 并不适用于 <code>themes/</code> 目录下的文件。如果需要忽略 <code>themes/</code> 目录下的部分文件或文件夹，可以使用 <code>ignore</code> 或在文件名之前添加下划线 <code>_</code>。</p>
-<h4 id="使用代替配置文件"><a href="#使用代替配置文件" class="headerlink" title="使用代替配置文件"></a>使用代替配置文件</h4><p>可以在 hexo-cli 中使用 <code>--config</code> 参数来指定自定义配置文件的路径。你可以使用一个 YAML 或 JSON 文件的路径，也可以使用逗号分隔（无空格）的多个 YAML 或 JSON 文件的路径。例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># use &#x27;custom.yml&#x27; in place of &#x27;_config.yml&#x27;</span><br><span class="line">$ hexo server --config custom.yml</span><br><span class="line"></span><br><span class="line"># use &#x27;custom.yml&#x27; &amp; &#x27;custom2.json&#x27;, prioritizing &#x27;custom3.yml&#x27;, then &#x27;custom2.json&#x27;</span><br><span class="line">$ hexo generate --config custom.yml,custom2.json,custom3.yml</span><br></pre></td></tr></table></figure>
-
-<p>当你指定了多个配置文件以后，Hexo 会按顺序将这部分配置文件合并成一个 <code>_multiconfig.yml</code>。如果遇到重复的配置，排在后面的文件的配置会覆盖排在前面的文件的配置。这个原则适用于任意数量、任意深度的 YAML 和 JSON 文件。</p>
-<p>例如，使用 <code>--options</code> 指定了两个自定义配置文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate --config custom.yml,custom2.json</span><br></pre></td></tr></table></figure>
-
-<p>如果 <code>custom.yml</code> 中指定了 <code>foo: bar</code>，在 custom2.json 中指定了 <code>&quot;foo&quot;: &quot;dinosaur&quot;</code>，那么在 <code>_multiconfig.yml</code> 中你会得到 <code>foo: dinosaur</code>。</p>
-<h4 id="使用代替主题配置文件"><a href="#使用代替主题配置文件" class="headerlink" title="使用代替主题配置文件"></a>使用代替主题配置文件</h4><p>通常情况下，Hexo 主题是一个独立的项目，并拥有一个独立的 <code>_config.yml</code> 配置文件。</p>
-<p>除了自行维护独立的主题配置文件，你也可以在其它地方对主题进行配置。</p>
-<p><strong>配置文件中的 <code>theme_config</code></strong></p>
-<blockquote>
-<p>该特性自 Hexo 2.8.2 起提供</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># _config.yml</span><br><span class="line">theme: &quot;my-theme&quot;</span><br><span class="line">theme_config:</span><br><span class="line">  bio: &quot;My awesome bio&quot;</span><br><span class="line">  foo:</span><br><span class="line">    bar: &#x27;a&#x27;</span><br><span class="line"># themes/my-theme/_config.yml</span><br><span class="line">bio: &quot;Some generic bio&quot;</span><br><span class="line">logo: &quot;a-cool-image.png&quot;</span><br><span class="line">  foo:</span><br><span class="line">    baz: &#x27;b&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>最终主题配置的输出是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  bio: &quot;My awesome bio&quot;,</span><br><span class="line">  logo: &quot;a-cool-image.png&quot;,</span><br><span class="line">  foo: &#123;</span><br><span class="line">    bar: &quot;a&quot;,</span><br><span class="line">    baz: &quot;b&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>独立的 <code>_config.[theme].yml</code> 文件</strong></p>
-<blockquote>
-<p>该特性自 Hexo 5.0.0 起提供</p>
-</blockquote>
-<p>独立的主题配置文件应放置于站点根目录下，支持 <code>yml</code> 或 <code>json</code> 格式。需要配置站点 <code>_config.yml</code> 文件中的 <code>theme</code> 以供 Hexo 寻找 <code>_config.[theme].yml</code> 文件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># _config.yml</span><br><span class="line">theme: &quot;my-theme&quot;</span><br><span class="line"># _config.my-theme.yml</span><br><span class="line">bio: &quot;My awesome bio&quot;</span><br><span class="line">foo:</span><br><span class="line">  bar: &#x27;a&#x27;</span><br><span class="line"># themes/my-theme/_config.yml</span><br><span class="line">bio: &quot;Some generic bio&quot;</span><br><span class="line">logo: &quot;a-cool-image.png&quot;</span><br><span class="line">  foo:</span><br><span class="line">    baz: &#x27;b&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>最终主题配置的输出是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  bio: &quot;My awesome bio&quot;,</span><br><span class="line">  logo: &quot;a-cool-image.png&quot;,</span><br><span class="line">  foo: &#123;</span><br><span class="line">    bar: &quot;a&quot;,</span><br><span class="line">    baz: &quot;b&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>我们强烈建议你将所有的主题配置集中在一处。如果你不得不在多处配置你的主题，那么这些信息对你将会非常有用：Hexo 在合并主题配置时，Hexo 配置文件中的 <code>theme_config</code> 的优先级最高，其次是 <code>_config.[theme].yml</code> 文件，最后是位于主题目录下的 <code>_config.yml</code> 文件。</p>
-</blockquote>
-
           
+ 参考官方文档：Hexo
+
+配置文件 _config.yml网站相关
+
+
+
+参数
+描述
+
+
+
+title
+网站标题
+
+
+subtitle
+网站副标题
+
+
+description
+网站描述
+
+
+keywords
+网站的关键词。支持多个关键词。
+
+
+author
+您的名字
+
+
+language
+网站使
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/19/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%BA%8C%EF%BC%89%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -802,7 +1142,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/19/hexo/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/19/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89%20%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%9D%E4%BD%93%E9%AA%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -821,7 +1161,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2021/07/19/hexo/" itemprop="url">hexo博客搭建(一) 安装和初体验</a></h1>
+                <a class="post-title-link" href="/2021/07/19/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89%20%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%9D%E4%BD%93%E9%AA%8C/" itemprop="url">hexo博客搭建（一）安装和初体验</a></h1>
         
 
         <div class="post-meta">
@@ -872,52 +1212,17 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>参考官方文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo</a></p>
 </blockquote>
-<h1 id="什么是hexo"><a href="#什么是hexo" class="headerlink" title="什么是hexo"></a>什么是hexo</h1><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a target="_blank" rel="noopener" href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="安装前提"><a href="#安装前提" class="headerlink" title="安装前提"></a>安装前提</h2><p>Node.js 和 Git</p>
-<h2 id="安装前提-1"><a href="#安装前提-1" class="headerlink" title="安装前提"></a>安装前提</h2><p>鼠标右键选择git bash 打开命令行</p>
-<p><code>$ npm install -g hexo-cli</code> (全局安装)或  <code>$ npm install hexo</code>（局部安装）</p>
-<h1 id="使用hexo命令"><a href="#使用hexo命令" class="headerlink" title="使用hexo命令"></a>使用hexo命令</h1><ul>
-<li><p><code>npx hexo &lt;command&gt;</code>    <strong>注意是npx!</strong></p>
-</li>
-<li><p>将 Hexo 所在的目录下的 <code>node_modules</code> 添加到环境变量之中即可直接使用 <code>hexo &lt;command&gt;</code></p>
-<p>​    （即将有hexo命令的目录添加到环境变量）</p>
-</li>
-</ul>
-<h1 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h1><p><code>$ hexo init &lt;folder&gt;</code>  新建<code>&lt;folder&gt;</code>文件夹为存放网站的文件夹   若不写<code>&lt;folder&gt;</code>则在当前目录下新建</p>
-<p><code>$ cd &lt;folder&gt;</code>    进入文件夹</p>
-<p><code>$ npm install</code></p>
-<p>新建完成后，文件夹目录如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml·		网站的配置信息，可以在此配置大部分的参数</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds			模板文件夹</span><br><span class="line">├── source      		存放用户资源的文件夹</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes       		主题文件夹，hexo根据主题来生成静态页面</span><br></pre></td></tr></table></figure>
-
-<h1 id="本地启动"><a href="#本地启动" class="headerlink" title="本地启动"></a>本地启动</h1><p><code>$ hexo server</code>    （简写为<code>$ hexo s</code>）</p>
-<p>默认情况下访问网址为 <code>http://localhost:4000/</code></p>
-<table>
-<thead>
-<tr>
-<th align="left">选项</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>-p</code>, <code>--port</code></td>
-<td align="left">重设端口</td>
-</tr>
-<tr>
-<td align="left"><code>-s</code>, <code>--static</code></td>
-<td align="left">只使用静态文件</td>
-</tr>
-<tr>
-<td align="left"><code>-l</code>, <code>--log</code></td>
-<td align="left">启动日记记录，使用覆盖记录格式</td>
-</tr>
-</tbody></table>
-<p><img src="/2021/07/19/hexo/1.jpg" alt="网站启动"></p>
-
-          
+<h2 id="什么是hexo"><a href="#什么是hexo" class="headerlink" title="什么是hexo"></a>什么是hexo</h2><p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a target="_blank" rel="noopener" href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/19/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88%E4%B8%80%EF%BC%89%20%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%9D%E4%BD%93%E9%AA%8C/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1035,21 +1340,15 @@
       
         
           
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/07/18/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1133,7 +1432,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1144,7 +1443,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1155,7 +1454,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1180,6 +1479,13 @@
 
       
 
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
       
 
     </div>
@@ -1210,7 +1516,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
 
 
 
@@ -1227,11 +1533,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
