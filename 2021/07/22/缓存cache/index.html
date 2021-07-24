@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="参考博客：(13条消息) 【Java知识点详解 1】缓存_GooReey的博客-CSDN博客  一、前言缓存可以让原本打开很慢的页面，变得能“秒开”。平时访问的APP与网站几乎都涉及缓存的运用。 那么，缓存除了能加速数据的访问之外，还有什么作用呢？ 另外，任何事物都有两面性，我们如何才能将缓存的优点发挥的淋漓尽致，同时避免它的弊端呢？ 本文就给大家分享一下如何理解缓存，以及它的运用思路，希望对大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="缓存cache">
+<meta property="og:url" content="http://liuying0128.github.io/2021/07/22/%E7%BC%93%E5%AD%98cache/index.html">
+<meta property="og:site_name" content="Silhouette">
+<meta property="og:description" content="参考博客：(13条消息) 【Java知识点详解 1】缓存_GooReey的博客-CSDN博客  一、前言缓存可以让原本打开很慢的页面，变得能“秒开”。平时访问的APP与网站几乎都涉及缓存的运用。 那么，缓存除了能加速数据的访问之外，还有什么作用呢？ 另外，任何事物都有两面性，我们如何才能将缓存的优点发挥的淋漓尽致，同时避免它的弊端呢？ 本文就给大家分享一下如何理解缓存，以及它的运用思路，希望对大">
+<meta property="og:locale">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLTUyMzBiNjcyYjEwZWFkNmRhZTZlZGE5NGQ3ZDFkNGJjMDVmLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWU1MGNkOTMzZjI1M2M1OTFkMTdkNDIyZTJkMjUyNzAwYjhhLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWE4N2Y1MjJmZWE2MWZmZGE5NDNjYzc0NWM0M2Q1OGZhNzQ0LkpQRUc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLTRlYmZhZmM4ODgxN2QwNTI1ZDQ4M2U2NDI1YzJiZGFiNjU2LnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWI5NDgxZjQ1ZDEzZDE2ODkzNzk0NjgyMGY0YjA2ZjFhNjE5LnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLTE0OGI0MzE0YjhiZWJjZGNjMWYyNmMyZWRjMGVmYzJmOWMxLnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWIxOGJjOTM4NzdkMjA3Y2E0MjgxMmZhZmMwMTcyOWRlYzQ3LnBuZw?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWRmNzBjYThlMjk1NzFhN2I2MzAwYmUyNGRhMmFhNjMxMTkwLkpQRUc?x-oss-process=image/format,png">
+<meta property="article:published_time" content="2021-07-22T01:47:03.000Z">
+<meta property="article:modified_time" content="2021-07-22T09:07:26.442Z">
+<meta property="article:author" content="liuying">
+<meta property="article:tag" content="computer life code programme  notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLTUyMzBiNjcyYjEwZWFkNmRhZTZlZGE5NGQ3ZDFkNGJjMDVmLnBuZw?x-oss-process=image/format,png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://liuying0128.github.io/2021/07/22/缓存cache/"/>
+
+
+
+
+
+  <title>缓存cache | Silhouette</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Silhouette</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">活在当下</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://liuying0128.github.io/2021/07/22/%E7%BC%93%E5%AD%98cache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Silhouette">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">缓存cache</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-22T09:47:03+08:00">
+                2021-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/guorui_java/article/details/104557984">(13条消息) 【Java知识点详解 1】缓存_GooReey的博客-CSDN博客</a></p>
+</blockquote>
+<h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a><strong>一、前言</strong></h2><p>缓存可以让原本打开很慢的页面，变得能“秒开”。平时访问的APP与网站几乎都涉及缓存的运用。</p>
+<p>那么，缓存除了能加速数据的访问之外，还有什么作用呢？</p>
+<p>另外，任何事物都有两面性，我们如何才能将缓存的优点发挥的淋漓尽致，同时避免它的弊端呢？</p>
+<p>本文就给大家分享一下如何理解缓存，以及它的运用思路，希望对大家有所启发。</p>
+<span id="more"></span>
+
+<h2 id="二、缓存能做什么？"><a href="#二、缓存能做什么？" class="headerlink" title="二、缓存能做什么？"></a><strong>二、缓存能做什么？</strong></h2><p>正如前面所说，大家最普遍的理解就是当我们遇到某个页面打开很慢的时候，会想到引入缓存，这样页面打开就快了。其实快和慢是相对的，从技术角度来说，缓存之所以快是因为缓存是基于内存去建立的，而内存的读写速度比硬盘快很多倍，所以用内存来代替磁盘作为读写的介质自然能大大提高访问数据的速度。</p>
+<p>这个过程大致是这样的，通过在内存中存储被访问过的数据供后续访问时使用，以此来达到提速的效果。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLTUyMzBiNjcyYjEwZWFkNmRhZTZlZGE5NGQ3ZDFkNGJjMDVmLnBuZw?x-oss-process=image/format,png" alt="img"></p>
+<p>其实除此之外，缓存还有另外两个重要的运用方式：预读取和延迟写。</p>
+<h2 id="三、预读取"><a href="#三、预读取" class="headerlink" title="三、预读取"></a><strong>三、预读取</strong></h2><p>预读取就是预先读取将要载入的数据，也可以称作“预存预热”，它是在系统中先将硬盘中的一部分加载到内存中，然后再对外提供服务。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWU1MGNkOTMzZjI1M2M1OTFkMTdkNDIyZTJkMjUyNzAwYjhhLnBuZw?x-oss-process=image/format,png" alt="img"></p>
+<p>为什么要这么做呢？因为有些系统一旦启动就要面临数以万计的请求进来，如果直接让这些请求打到数据库上，非常大的可能是数据库压力暴增，直接被反扒下，无法正常响应。</p>
+<p>为了缓解这个问题，就需要通过“预读取”来解决。</p>
+<p>可能你会玩，哪怕用了缓存还是扛不住吗？那就是做横向扩展和负载均衡的时候了，这不是本文讨论的内容，有机会再专门分享吧。</p>
+<p>如果说“预读取”是在“数据出口”加了一道前置的缓冲区的话，那么下面要说的“延迟写”就是在“数据入口”后面加了一道后置的缓冲区。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWE4N2Y1MjJmZWE2MWZmZGE5NDNjYzc0NWM0M2Q1OGZhNzQ0LkpQRUc?x-oss-process=image/format,png" alt="img"></p>
+<h2 id="四、延迟写"><a href="#四、延迟写" class="headerlink" title="四、延迟写"></a><strong>四、延迟写</strong></h2><p>你可能知道，数据库的写入速度是慢于读取速度的，因为写入的时候有一系列的保证数据准确性的机制。所以，如果想提升写入速度的话，要么做分库分表，要么就是通过缓存来进行一道缓冲，再一次性批量写到磁盘，以此来提速。</p>
+<p>由于分库分表对跨表操作以及多条件组合查询的副作用巨大，所以引入它的复杂度大于引入缓存，我们应当优先考虑引入缓存的方案。</p>
+<p>那么，通过缓存机制来加速“写”的过程就可以称作“延迟写”，它是预先将需要写入磁盘或数据库的数据，暂时写入到内存，然后返回成功，再定时将内存中的数据批量写入到磁盘。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLTRlYmZhZmM4ODgxN2QwNTI1ZDQ4M2U2NDI1YzJiZGFiNjU2LnBuZw?x-oss-process=image/format,png" alt="img"></p>
+<p>可能你会想，写到内存就认为成功，万一中途出现意外、断电、停机等导致程序异常终止的情况，数据不就丢失了吗？</p>
+<p>是的，所以“延迟写”一般仅用于对数据完整性要求不是那么苛刻的场景，比如点赞数、参与用户数等等，可以大大缓解对数据库频繁修改所带来的压力。</p>
+<p>其实在我们熟知的分布式缓存Redis中，其默认运用的持久化机制—RDB，也是这样的思路。</p>
+<p>在一个成熟的系统中，能够运用到缓存的地方其实并不是一处。下面就来梳理一下我们在那些地方可以加“缓存”。</p>
+<h2 id="五、哪里可以加缓存？"><a href="#五、哪里可以加缓存？" class="headerlink" title="五、哪里可以加缓存？"></a><strong>五、哪里可以加缓存？</strong></h2><p>在说哪里可以加缓存之前我们先搞清楚一个事情，我们要缓存什么？也就是符合什么特点的数据才需要加缓存？毕竟加缓存是一个额外的成本投入，得物有所值。</p>
+<p>一般来说你可以用两个标准来衡量：</p>
+<p>热点数据：被高频访问，如几十次/秒以上。</p>
+<p>静态数据：很少变化，读大于写。</p>
+<p>接下来就可以替他们找到合适的地方加缓存了。</p>
+<p>缓存的本质是一个“防御性”的机制，而系统之间的数据流转是一个有序的过程，所以，选择在哪里加缓存就相当于选择在一条马路的哪个位置设路障。在这个路障之后的道路都能受到保护，不被车流碾压。</p>
+<p>那么在以终端用户为起点，系统所用的数据库为终点的这条道路上可以作为缓存设立点的位置大致有以下这些：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWI5NDgxZjQ1ZDEzZDE2ODkzNzk0NjgyMGY0YjA2ZjFhNjE5LnBuZw?x-oss-process=image/format,png" alt="img"></p>
+<p>每个设立点可以挡掉一些流量，最终形成一个漏斗状的拦截效果，以此保护最后面的系统以及最终的数据库。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLTE0OGI0MzE0YjhiZWJjZGNjMWYyNmMyZWRjMGVmYzJmOWMxLnBuZw?x-oss-process=image/format,png" alt="img"></p>
+<p>下面简要描述一下每个运用场景以及需要注意的点。</p>
+<h2 id="六、缓存类别"><a href="#六、缓存类别" class="headerlink" title="六、缓存类别"></a><strong>六、缓存类别</strong></h2><h3 id="1、浏览器缓存"><a href="#1、浏览器缓存" class="headerlink" title="1、浏览器缓存"></a>1、浏览器缓存</h3><p>这是离用户最近的可以作为缓存的地方，而且借助的是用户的“资源”（缓存的数据在用户的终端设备上），性价比可谓最好，让用户帮你分担压力。</p>
+<p>当你打开浏览器的开发者工具，看到 from cache 或者 from memory cache、from disk cache 的时候，就意味着这些数据已经被缓存在了用户的终端设备上了，没网的时候也能访问到一部分内容就是这个原因。</p>
+<p>这个过程是浏览器替我们完成的，一般用于缓存图片、js 与 css 这些资源，我们可以通过 Http 消息头中的 Cache-Control 来控制它，具体细节这里就不展开了。此外，js 里的全局变量、cookie 等运用也属于该范畴。</p>
+<p>浏览器缓存是在用户侧的缓存点，所以我们对它的掌控力比较差，在没有发起新请求的情况下，你无法主动去更新数据。</p>
+<h3 id="2、CDN缓存"><a href="#2、CDN缓存" class="headerlink" title="2、CDN缓存"></a>2、CDN缓存</h3><p>提供CDN服务的服务商，在全国甚至是全球部署着大量的服务器节点（可以叫做“边缘服务器”）。那么将数据分发到这些遍布各地服务器上作为缓存，让用户访问就近的服务器上的缓存数据，就可以起到压力分摊和加速效果。这在TOC类型的系统上运用，效果格外显著。</p>
+<p>但是需要注意的是，由于节点众多，更新缓存数据比较缓慢，一般至少是分钟级别，所以一般仅适用于不经常变动的静态数据。</p>
+<p>解决方式也是有的，就是在 url 后面带个自增数或者唯一标示，如 ?v=1001。因为不同的 url 会被视作“新”的数据和文件，被重新 create 出来。</p>
+<h3 id="3、网关（代理）缓存"><a href="#3、网关（代理）缓存" class="headerlink" title="3、网关（代理）缓存"></a>3、网关（代理）缓存</h3><p>很多时候我们在源站前面加一层网关，为的是做一些安全机制或者作为统一分流策略的入口。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWIxOGJjOTM4NzdkMjA3Y2E0MjgxMmZhZmMwMTcyOWRlYzQ3LnBuZw?x-oss-process=image/format,png" alt="img"></p>
+<p>同时这里也是做缓存的一个好场所，毕竟网关是“业务无关”的，它能够拦下来请求，对背后的源站也有很大的受益，减少了大量的CPU运算。</p>
+<p>常用的网关缓存有Varnish、Squid与Ngnix。一般情况下，简单的缓存运用场景，用Ngnix即可，因为大部分时候我们会用它做负载均衡，能少引入一个技术就少一分复杂度。如果是大量的小文件可以使用Varnish，而 Squid 则相对大而全，运用成本也更高一些。</p>
+<h3 id="4、进程内缓存"><a href="#4、进程内缓存" class="headerlink" title="4、进程内缓存"></a>4、进程内缓存</h3><p>可能我们大多数程序员第一次刻意使用缓存的场景就是这个时候。</p>
+<p>一个请求能走到这里说明它是“业务相关”的，需要经过业务逻辑的运算。</p>
+<p>也正因如此，从这里开始对缓存的引入成本比前面3种大大增加，因为对缓存与数据库之间的“数据一致性”要求更高了。</p>
+<h3 id="5、进程外缓存"><a href="#5、进程外缓存" class="headerlink" title="5、进程外缓存"></a>5、进程外缓存</h3><p>这个大家也熟悉，就是 Redis 与 Memcached 之类，甚至也可以自己单独写一个程序来专门存放缓存数据，供其它程序远程调用。</p>
+<p>这里先多说几句关于 Redis 和 Memcached 该怎么选择的思路。</p>
+<p>对资源（CPU、内存等）利用率格外重视的话可以使用Memcached ，但程序在使用的时候需要容忍可能发生的数据丢失，因为纯内存的机制。如果无法容忍这单，并对资源利用率也比较豪放的话就可以使用Redis。而且Redis的数据库结构更多， Memcached 只有 key-value，更像是一个 NoSQL 存储。</p>
+<h3 id="6、数据库缓存"><a href="#6、数据库缓存" class="headerlink" title="6、数据库缓存"></a>6、数据库缓存</h3><p>数据库本身是自带缓存模块的，否者也不会叫它内存杀手，基本上你给多少内存它就能吃多少内存。数据库缓存是数据库的内部机制，一般都会给出设置缓存空间大小的配置来让你进行干预。</p>
+<p>最后，其实磁盘本身也有缓存。所以你会发现，为了让数据能够平稳地写到物理磁盘中真的是一波三折。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9vc2NpbWcub3NjaGluYS5uZXQvb3NjbmV0L3VwLWRmNzBjYThlMjk1NzFhN2I2MzAwYmUyNGRhMmFhNjMxMTkwLkpQRUc?x-oss-process=image/format,png" alt="img"></p>
+<h2 id="七、缓存是银弹吗？"><a href="#七、缓存是银弹吗？" class="headerlink" title="七、缓存是银弹吗？"></a><strong>七、缓存是银弹吗？</strong></h2><p>可能你会想缓存那么好，那么应该多多益善，只要慢就上缓存来解决？</p>
+<p>一个事物看上去再好，也有它负面的一面，缓存也有一系列的副作用需要考虑。除了前面提到的“缓存更新”和“缓存与数据的一致性”问题，还有诸如下边的这些问题：</p>
+<h3 id="1、缓存雪崩"><a href="#1、缓存雪崩" class="headerlink" title="1、缓存雪崩"></a>1、缓存雪崩</h3><p>大量的请求并发进入时，由于某些原因未起到预期的缓冲效果，哪怕只是很短的一段时间，导致请求全部转到数据库，造成数据库压力过重。解决它可以通过“加锁排队”或者“缓存时间增加随机值”。</p>
+<h3 id="2、缓存穿透"><a href="#2、缓存穿透" class="headerlink" title="2、缓存穿透"></a>2、缓存穿透</h3><p>和缓存雪崩类似，区别是这会持续更长的时间，因为每次“cache miss”后依然无法从数据源加载数据到缓存，导致持续产生“cache miss”。解决它可以通过“布隆过滤器”或者“缓存空对象”。</p>
+<h3 id="3、缓存并发"><a href="#3、缓存并发" class="headerlink" title="3、缓存并发"></a>3、缓存并发</h3><p>一个缓存key下的数据被同时set，怎么保证业务的准确性？再加上数据库的话？进程内缓存、进程外缓存与数据库三者皆用的情况下呢？用一句话来概括建议的方案是：使用“先DB再缓存”的方式，并且缓存操作用delete而不是set。</p>
+<h3 id="4、缓存无底洞"><a href="#4、缓存无底洞" class="headerlink" title="4、缓存无底洞"></a>4、缓存无底洞</h3><p>虽然分布式缓存是可以无限横向扩展的，但是，集群下的节点真的是越多越好吗？当然不是，缓存也是符合“边际效用递减”规律的。</p>
+<h3 id="5、缓存淘汰"><a href="#5、缓存淘汰" class="headerlink" title="5、缓存淘汰"></a>5、缓存淘汰</h3><p>内存总是有限的，如果数据量很大，那么根据具体的场景定制合理的淘汰策略是必不可少的， 如 LRU、LFU 与 FIFO 等等。</p>
+<h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a><strong>八、总结</strong></h2><p>本文介绍了运用缓存的三种思路，然后梳理了在一个完整的系统中可以设立缓存的几个位置，并且分享了关于浏览器、CDN与网关（代理）等缓存的一些实用经验，没有具体展开来讲细节，只是希望我们对缓存有一个更加体系化的认识，希望能让我们变得更加全面。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/20/%E6%B4%BB%E7%9D%80%201/" rel="next" title="活着 1">
+                <i class="fa fa-chevron-left"></i> 活着 1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/22/%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91%E7%BB%9CCDN/" rel="prev" title="内容分发网络CDN">
+                内容分发网络CDN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BC%93%E5%AD%98%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">二、缓存能做什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%A2%84%E8%AF%BB%E5%8F%96"><span class="nav-text">三、预读取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%BB%B6%E8%BF%9F%E5%86%99"><span class="nav-text">四、延迟写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%93%AA%E9%87%8C%E5%8F%AF%E4%BB%A5%E5%8A%A0%E7%BC%93%E5%AD%98%EF%BC%9F"><span class="nav-text">五、哪里可以加缓存？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%BC%93%E5%AD%98%E7%B1%BB%E5%88%AB"><span class="nav-text">六、缓存类别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98"><span class="nav-text">1、浏览器缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81CDN%E7%BC%93%E5%AD%98"><span class="nav-text">2、CDN缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E7%BD%91%E5%85%B3%EF%BC%88%E4%BB%A3%E7%90%86%EF%BC%89%E7%BC%93%E5%AD%98"><span class="nav-text">3、网关（代理）缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E8%BF%9B%E7%A8%8B%E5%86%85%E7%BC%93%E5%AD%98"><span class="nav-text">4、进程内缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E8%BF%9B%E7%A8%8B%E5%A4%96%E7%BC%93%E5%AD%98"><span class="nav-text">5、进程外缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BC%93%E5%AD%98"><span class="nav-text">6、数据库缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E7%BC%93%E5%AD%98%E6%98%AF%E9%93%B6%E5%BC%B9%E5%90%97%EF%BC%9F"><span class="nav-text">七、缓存是银弹吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="nav-text">1、缓存雪崩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="nav-text">2、缓存穿透</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E7%BC%93%E5%AD%98%E5%B9%B6%E5%8F%91"><span class="nav-text">3、缓存并发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E7%BC%93%E5%AD%98%E6%97%A0%E5%BA%95%E6%B4%9E"><span class="nav-text">4、缓存无底洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E7%BC%93%E5%AD%98%E6%B7%98%E6%B1%B0"><span class="nav-text">5、缓存淘汰</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">八、总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuying</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

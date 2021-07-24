@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,序列化," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="面试官：兄弟，说说你对transient的理解和感悟 what？还有感悟？  参考博客：(13条消息) 【Java知识点详解 3】序列化与反序列化_GooReey的博客-CSDN博客  一、基本概念1、序列化和反序列化定义Java序列化是指把Java对象转换为字节序列的过程。 Java反序列化是指把字节序列恢复为Java对象的过程。 2、序列化和反序列化的作用（1）序列化作用在传递和保存对象时，保">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java序列化与反序列化">
+<meta property="og:url" content="http://liuying0128.github.io/2021/07/22/java%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:site_name" content="Silhouette">
+<meta property="og:description" content="面试官：兄弟，说说你对transient的理解和感悟 what？还有感悟？  参考博客：(13条消息) 【Java知识点详解 3】序列化与反序列化_GooReey的博客-CSDN博客  一、基本概念1、序列化和反序列化定义Java序列化是指把Java对象转换为字节序列的过程。 Java反序列化是指把字节序列恢复为Java对象的过程。 2、序列化和反序列化的作用（1）序列化作用在传递和保存对象时，保">
+<meta property="og:locale">
+<meta property="og:image" content="http://liuying0128.github.io/2021/07/22/java%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/1.png">
+<meta property="og:image" content="http://liuying0128.github.io/2021/07/22/java%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/2.png">
+<meta property="article:published_time" content="2021-07-22T03:41:46.000Z">
+<meta property="article:modified_time" content="2021-07-22T08:02:23.296Z">
+<meta property="article:author" content="liuying">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="序列化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://liuying0128.github.io/2021/07/22/java%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://liuying0128.github.io/2021/07/22/java序列化与反序列化/"/>
+
+
+
+
+
+  <title>java序列化与反序列化 | Silhouette</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Silhouette</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">活在当下</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://liuying0128.github.io/2021/07/22/java%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Silhouette">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java序列化与反序列化</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-22T11:41:46+08:00">
+                2021-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>面试官：兄弟，说说你对transient的理解和感悟</p>
+<p>what？还有感悟？</p>
+<blockquote>
+<p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/guorui_java/article/details/106996834">(13条消息) 【Java知识点详解 3】序列化与反序列化_GooReey的博客-CSDN博客</a></p>
+</blockquote>
+<h2 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h2><h3 id="1、序列化和反序列化定义"><a href="#1、序列化和反序列化定义" class="headerlink" title="1、序列化和反序列化定义"></a>1、序列化和反序列化定义</h3><p>Java序列化是指把Java对象转换为字节序列的过程。</p>
+<p>Java反序列化是指把字节序列恢复为Java对象的过程。</p>
+<h3 id="2、序列化和反序列化的作用"><a href="#2、序列化和反序列化的作用" class="headerlink" title="2、序列化和反序列化的作用"></a>2、序列化和反序列化的作用</h3><p>（1）序列化作用<br>在传递和保存对象时，保存对象的完整性和可传递性。<br>对象转换为有序字节流，可以在网络上传输或者保存在本地文件（一般json/xml文件居多）中。</p>
+<p>（2）反序列化作用<br>根据字节流中保存的对象状态及描述信息，通过反序列化重建对象。</p>
+<span id="more"></span>
+
+<p><img src="/2021/07/22/java%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/1.png" style="width:600px"></p>
+<h2 id="二、序列化和反序列化的优缺点"><a href="#二、序列化和反序列化的优缺点" class="headerlink" title="二、序列化和反序列化的优缺点"></a>二、序列化和反序列化的优缺点</h2><h3 id="1、优点"><a href="#1、优点" class="headerlink" title="1、优点"></a>1、优点</h3><p>（1）将对象转为字节流存储到硬盘上，当JVM停机的时候，字节流还会在硬盘上等待，等待下一次JVM启动，把序列化的对象，通过反序列化转为原来的对象，并且序列化的二进制序列能够减少存储空间（永久性保存对象）。</p>
+<p>（2）序列化为字节流形式的对象可以进行网络传输（二进制形式）。</p>
+<p>（3）通过序列化可以在进程间传递对象。</p>
+<h3 id="2、缺点"><a href="#2、缺点" class="headerlink" title="2、缺点"></a>2、缺点</h3><p>（1）无法跨语言<br>无法跨语言是Java序列化最致命的问题。</p>
+<p>对于跨进程的服务调用，服务提供者可能是Java之外的其它语言，当我们需要和其它语言交互时，Java序列化就难以胜任。</p>
+<p>事实上，目前几乎所有流行的Java RPC通信框架，都没有使用Java序列化作为编解码框架，原因就是它无法跨语言，而这些RPC框架往往需要支持跨语言调用。</p>
+<blockquote>
+<p> Java RPC通信框架简介</p>
+<p>RPC是远程过程调用的简称，广泛应用在大规模分布式应用中，作用是有助于系统的垂直拆分，使系统更易扩展。Java中RPC框架比较多，各有特色，广泛使用的有RMI、Hession、Dubbo等。</p>
+<p>1、RMI（远程方法调用）：</p>
+<p>JAVA自带的远程方法调用工具，不过有一定的局限性，毕竟是JAVA语言最开始时的设计，后来很多框架的原理都基于RMI。</p>
+<p>2、Hessian（基于HTTP的远程方法调用）：</p>
+<p>基于HTTP协议传输，在性能方面还不够完美，负载均衡和失效转移依赖于应用的负载均衡器，Hessian的使用则与RMI类似，区别在于淡化了Registry的角色，通过显示的地址调用，利用HessianProxyFactory根据配置的地址create一个代理对象，另外还要引入Hessian的Jar包。</p>
+<p>3、Dubbo（淘宝开源的基于TCP的RPC框架）</p>
+<p>Dubbo是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。</p>
+</blockquote>
+<p>RPC是远程过程调用的简称，广泛应用在大规模分布式应用中，作用是有助于系统的垂直拆分，使系统更易扩展。Java中RPC框架比较</p>
+<p>（2）序列化后流的长度比通过缓冲区处理要大的多。<br>（3）序列化性能太低</p>
+<h2 id="三、序列化使用场景"><a href="#三、序列化使用场景" class="headerlink" title="三、序列化使用场景"></a>三、序列化使用场景</h2><p>1、分布式传递对象，或者网络传输，需要序列化</p>
+<p>2、我调用你的jvm的方法，结果返回到我的jvm上进行处理</p>
+<p>3、序列化可以保持对象的状态<br>比如：tomcat关闭以后会把session对象序列化到SESSIONS.ser文件中，等下次启动的时候就把这些session再加载到内存里面来。</p>
+<p>4、数据传输并复原</p>
+<p>在j2ee中页面与后台使用的比较多。尤其是在列表中的时候使用尤为突出。</p>
+<p>比如：一个人员的列表保存起来的话，你可以将这个列表序列化，传到后台，然后再反序列化成person对象直接进行对象的保存。</p>
+<p>5、比如EJB远程调用 分布式存储，缓存存储等</p>
+<p>6、像银行卡、密码这些字段不能被序列化</p>
+<h2 id="四、序列化和反序列化的注意事项"><a href="#四、序列化和反序列化的注意事项" class="headerlink" title="四、序列化和反序列化的注意事项"></a>四、序列化和反序列化的注意事项</h2><p>1、Java序列化的方式<br>实现 Serializable 接口：可以自定义 writeObject、readObject、writeReplace、readResolve 方法，会通过反射调用。</p>
+<p>实现 Externalizable 接口：需要实现 writeExternal 和 readExternal 方法。</p>
+<p>2、序列化ID问题<br>虚拟机是否允许反序列化，不仅取决于类路径和功能代码是否一致，一个非常重要的一点是两个类的序列化 ID 是否一致（就是 private static final long serialVersionUID = 1L）。</p>
+<p>3、静态字段不会序列化<br>序列化时不保存静态变量，这是因为序列化保存的是对象的状态，静态变量属于类的状态，因此序列化并不保存静态变量。</p>
+<p>4、transient<br>transient代表对象的临时数据。</p>
+<p>如果你不想让对象中的某个成员被序列化可以在定义它的时候加上 transient 关键字进行修饰，这样，在对象被序列化时其就不会被序列化。</p>
+<p>transient 修饰过的成员反序列化后将赋予默认值，即 0 或 null。</p>
+<p>有些时候像银行卡号这些字段是不希望在网络上传输的，transient的作用就是把这个字段的生命周期仅存于调用者的内存中而不会写到磁盘里持久化。</p>
+<p>5、父类的序列化<br>当一个父类实现序列化，子类自动实现序列化；而子类实现了 Serializable 接口，父类也需要实现Serializable 接口。</p>
+<p>6、当一个对象的实例变量引用其他对象，序列化该对象时也把引用对象进行序列化<br>7、并非所有的对象都可以序列化<br>（1）安全方面的原因，比如一个对象拥有private，public等field，对于一个要传输的对象，比如写到文件，或者进行RMI传输等等，在序列化进行传输的过程中，这个对象的private等域是不受保护的；</p>
+<p>（2）资源分配方面的原因，比如socket，thread类，如果可以序列化，进行传输或者保存，也无法对他们进行重新的资源分配，而且，也是没有必要这样实现；</p>
+<p>8、序列化解决深拷贝问题<br>如果一个对象的成员变量是一个对象，那么这个对象的数据成员也会被保存，这是能用序列化解决深拷贝的重要原因。</p>
+<h2 id="五、代码实例"><a href="#五、代码实例" class="headerlink" title="五、代码实例"></a>五、代码实例</h2><p>1、实体类<br>package javase.transientpackage;</p>
+<p>import java.io.Serializable;</p>
+<p>public class User implements Serializable {<br>    private static final long serialVersionUID = 1L;<br>    private String username;<br>    private transient String password;</p>
+<pre><code>//construct、setter、getter
+</code></pre>
+<p>}<br>2、ObjectOutputStream实现序列化和ObjectInputStream实现反序列化 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> javase.transientpackage;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TransientTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            SerializeUser();</span><br><span class="line">            DeSerializeUser();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//序列化</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SerializeUser</span><span class="params">()</span> <span class="keyword">throws</span> IOException</span>&#123;</span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.setUsername(<span class="string">&quot;素小暖&quot;</span>);</span><br><span class="line">        user.setPassword(<span class="string">&quot;123456&quot;</span>);</span><br><span class="line">        ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">&quot;D://data.txt&quot;</span>));</span><br><span class="line">        oos.writeObject(user);</span><br><span class="line">        oos.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;普通字段序列化：username=  &quot;</span>+user.getUsername());</span><br><span class="line">        System.out.println(<span class="string">&quot;添加了transient关键字序列化：password=  &quot;</span>+user.getPassword());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//反序列化</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">DeSerializeUser</span><span class="params">()</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">&quot;D://data.txt&quot;</span>);</span><br><span class="line">        ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(file));</span><br><span class="line">        User user = (User)ois.readObject();</span><br><span class="line">        System.out.println(<span class="string">&quot;普通字段反序列化：username=  &quot;</span>+user.getUsername());</span><br><span class="line">        System.out.println(<span class="string">&quot;添加了transient关键字反序列化：password=  &quot;</span>+user.getPassword());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、控制台输出</p>
+<p><img src="/2021/07/22/java%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/2.png" style="width:600px"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/%E5%BA%8F%E5%88%97%E5%8C%96/" rel="tag"># 序列化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/22/java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" rel="next" title="java动态代理">
+                <i class="fa fa-chevron-left"></i> java动态代理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/22/java%E6%9E%9A%E4%B8%BE/" rel="prev" title="java枚举">
+                java枚举 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-text">一、基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AE%9A%E4%B9%89"><span class="nav-text">1、序列化和反序列化定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">2、序列化和反序列化的作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">二、序列化和反序列化的优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%BC%98%E7%82%B9"><span class="nav-text">1、优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%BC%BA%E7%82%B9"><span class="nav-text">2、缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">三、序列化使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">四、序列化和反序列化的注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B"><span class="nav-text">五、代码实例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuying</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
